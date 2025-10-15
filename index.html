@@ -3,727 +3,473 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>beLOVEd – Sound, Spirit & Grounding</title>
-  <meta name="theme-color" content="#6d4aa1" />
-  <style>
-    :root{
-      --bg1:#40296b; /* deep soft purple */
-      --bg2:#6d4aa1; /* soft purple */
-      --gold:#D4AF37;
-      --silver:#C0C0C0;
-      --text:#F5F3FF;
-      --muted:#d8c6ff55;
-      --accent:#9b79d6;
-      --ok:#46c07a;
-      --warn:#e6b422;
-    }
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--text);background:linear-gradient(135deg,var(--bg1),var(--bg2));}
-    .app{max-width:1100px;margin:0 auto;padding:16px 16px 80px;}
-    h1,h2,h3{margin:0 0 8px 0}
-    .header{display:flex;align-items:center;gap:12px;margin:8px 0 16px}
-    .chip{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--gold);border-radius:999px;padding:8px 14px;margin:6px;background:linear-gradient(180deg,#54358f,#51318a);box-shadow:0 0 0 1px #00000022 inset,0 6px 20px #00000030;}
-    .grid{display:grid;gap:12px}
-    @media(min-width:720px){.grid.cols-2{grid-template-columns:1fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}.grid.cols-4{grid-template-columns:repeat(4,1fr)}}
-    .card{border-radius:16px;padding:14px;background:#2d1f4b99;border:1px solid #ffffff22;backdrop-filter:blur(6px);box-shadow:0 10px 30px #00000045}
-    .title{font-weight:700;letter-spacing:.3px}
-    .subtitle{opacity:.85;font-size:.92rem}
-    .btn{cursor:pointer;user-select:none;border-radius:999px;border:1px solid var(--silver);padding:10px 14px;background:linear-gradient(180deg,#b7aef7,#8e78d8);color:#1a1030;font-weight:700;box-shadow:0 2px 0 #00000030;}
-    .btn.gold{background:linear-gradient(180deg,#ffe9a8,#dfc15a);border-color:#f6e6a3}
-    .btn.silver{background:linear-gradient(180deg,#f1f1f1,#cacaca);border-color:#fafafa}
-    .btn.purple{background:linear-gradient(180deg,#ab90ff,#8a68de);border-color:#d8c6ff}
-    .btn.block{display:block;width:100%;text-align:center}
-    .btn-row{display:flex;gap:8px;flex-wrap:wrap}
-    .slider{width:100%}
-    .small{font-size:.9rem;opacity:.9}
-    .muted{opacity:.8}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .pill{padding:4px 10px;border:1px solid var(--gold);border-radius:999px}
-    .tabbar{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;align-items:center;justify-content:center;padding:12px;background:#1c1136cc;border-top:1px solid #ffffff22;backdrop-filter:blur(8px)}
-    .tabbar .btn{min-width:110px}
-    .kbd{font-family:ui-monospace,Consolas,Monaco,monospace;background:#00000033;border:1px solid #ffffff22;border-radius:6px;padding:2px 6px}
-    .ring{width:20px;height:20px;border-radius:50%;border:2px solid var(--gold);box-shadow:0 0 0 3px #ffffff10 inset}
-    .progress{height:8px;background:#ffffff18;border-radius:999px;overflow:hidden}
-    .progress > span{display:block;height:100%;background:linear-gradient(90deg,#ffe9a8,#bc9cff)}
-
-    dialog{border:none;border-radius:16px;padding:0;max-width:720px;color:var(--text);background:#2d1f4b;}
-    .modal{padding:18px}
-    .modal h2{margin-bottom:6px}
-    .modal .footer{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
-    a.link{color:#ffe9a8}
-  </style>
-  <!-- PWA icons (small inline SVG favicon) -->
-  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="%236d4aa1"/><stop offset="1" stop-color="%23d4af37"/></linearGradient></defs><rect width="256" height="256" rx="48" fill="url(%23g)"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="120" fill="white" font-family="Arial, Helvetica, sans-serif">❤</text></svg>'/>
-
-</head>
-<body>
-  <div id="root"></div>
-
-  <!-- React via CDN -->
+  <title>Solfeggio Healing Companion — Rev. AURorA Ute</title>
+  <meta name="description" content="Professional, privacy-first Solfeggio & binaural beats companion with mood-based auto-healing, diary, chakra hub, breathing coach, and nature-inspired soft-gold design." />
+  <!-- Tailwind (no build setup needed) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React 18 UMD + Babel for JSX-in-browser -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <!-- Babel so the JSX below runs in the browser -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root{
+      --gold-1:#f9edd1; /* soft highlight */
+      --gold-2:#f3e1b0; /* soft base */
+      --gold-3:#ebcf8f; /* accent */
+      --ink:#2a2a2a;    /* text */
+    }
+    html,body{height:100%}
+    body{
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 80% -10%, var(--gold-1), transparent 60%),
+        radial-gradient(900px 600px at -10% 10%, var(--gold-2), transparent 55%),
+        linear-gradient(180deg, #f7e7c6 0%, #f0d9a1 60%, #e7cc8c 100%);
+    }
+    /* Nature overlay */
+    .nature-overlay{ position: fixed; inset: 0; pointer-events: none; opacity:.22; mix-blend-mode:multiply;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900"><g fill="none" stroke="%239a885a" stroke-width="1.1" opacity="0.6"><path d="M40,740 C120,640 210,640 290,740"/><path d="M210,700 c40,-60 90,-60 130,0"/><path d="M420,760 c60,-90 150,-90 210,0"/><path d="M760,690 c70,-70 150,-70 220,0"/><path d="M960,760 c80,-100 170,-100 260,0"/></g><g fill="%23a79a66" opacity="0.35"><circle cx="160" cy="120" r="26"/><circle cx="210" cy="160" r="18"/><circle cx="980" cy="140" r="24"/><circle cx="1040" cy="200" r="16"/></g></svg>');
+      background-repeat:no-repeat; background-size:cover; background-position:center; }
+    .glass{background:rgba(255,255,255,.6); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.65)}
+    .btn{border-radius:0.75rem; padding:0.6rem 1rem; font-weight:600}
+    .brand{letter-spacing:.2px}
+    /* Breathing circle */
+    .breath-circle{ width:140px; height:140px; border-radius:9999px; border:2px solid rgba(0,0,0,.15);
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.8), rgba(255,255,255,.5));
+      transition: transform 1s ease;
+    }
+    .breath-in { transform: scale(1.05); }
+    .breath-hold{ transform: scale(1.0); }
+    .breath-out { transform: scale(0.92); }
+  </style>
+</head>
+<body>
+  <div class="nature-overlay"></div>
+  <div id="root"></div>
 
-  <!-- IMPORTANT: Use type=text/babel so the JSX is compiled. Fix for Unexpected token '<' -->
   <script type="text/babel">
-  /******************** UTIL & STORAGE ********************/
-  const $ = (q, el=document) => el.querySelector(q);
-  const store = {
-    get(k, def){ try{ const v = JSON.parse(localStorage.getItem(k)); return v ?? def }catch{ return def } },
-    set(k, v){ localStorage.setItem(k, JSON.stringify(v)) },
-    push(k, v){ const arr = store.get(k, []); arr.push(v); store.set(k, arr) }
-  };
+    const { useEffect, useMemo, useRef, useState } = React;
 
-  const chakraHz = store.get('settings.chakraHz', {
-    Root:396, Sacral:417, 'Solar Plexus':528, Heart:639, Throat:741, 'Third Eye':852, Crown:963
-  });
+    /* ========================= Data & Mappings ========================= */
+    const STORAGE_KEY = "solfeggioPro.entries.v2";
 
-  /******************** AUDIO ENGINE ********************/
-  class AudioEngine {
-    constructor(){
-      this.ctx = null;
-      this.master = null;
-      this.nodes = new Set();
-    }
-    ensure(){
-      if(!this.ctx){
-        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-        this.master = this.ctx.createGain();
-        this.master.gain.value = 0.9;
-        this.master.connect(this.ctx.destination);
-      }
-      if(this.ctx.state === 'suspended') this.ctx.resume();
-    }
-    now(){ return this.ctx?.currentTime || 0; }
-    stopAll(ms=0.8){ this.nodes.forEach(n => this.stop(n, ms)); }
-    rampParam(param, to, sec=0.2){ const t=this.now(); try{ param.cancelScheduledValues(t); param.linearRampToValueAtTime(to, t+sec);}catch{} }
-    
-    createTone({hz=432, type='sine', gain=0.2, pan=0, binauralOffsetHz=0, filter=null}){
-      this.ensure();
-      const oL = this.ctx.createOscillator();
-      oL.type = type; oL.frequency.value = hz - (binauralOffsetHz/2);
-      const oR = this.ctx.createOscillator();
-      oR.type = type; oR.frequency.value = hz + (binauralOffsetHz/2);
-
-      const gL = this.ctx.createGain(); gL.gain.value = gain/2;
-      const gR = this.ctx.createGain(); gR.gain.value = gain/2;
-
-      const pL = this.ctx.createStereoPanner(); pL.pan.value = Math.min(pan-0.1, 1);
-      const pR = this.ctx.createStereoPanner(); pR.pan.value = Math.max(pan+0.1, -1);
-
-      let fL=null,fR=null;
-      if(filter){ fL=this.ctx.createBiquadFilter(); fL.type=filter.type; fL.frequency.value=filter.freq; fR=this.ctx.createBiquadFilter(); fR.type=filter.type; fR.frequency.value=filter.freq; }
-
-      oL.connect(fL||gL); (fL||gL).connect(pL).connect(this.master);
-      oR.connect(fR||gR); (fR||gR).connect(pR).connect(this.master);
-
-      oL.start(); oR.start();
-      const node = {kind:'tone', oL,oR,gL,gR,pL,pR, stop:()=>{oL.stop();oR.stop();}};
-      this.nodes.add(node);
-      return node;
-    }
-
-    // Noise generators to simulate ocean/rain/wind
-    createNoise({type='brown', gain=0.2, pan=0, lfo=false, filterFreq=800}){
-      this.ensure();
-      const bufferSize = 2 * this.ctx.sampleRate;
-      const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-      const output = noiseBuffer.getChannelData(0);
-      let lastOut = 0.0;
-      for (let i = 0; i < bufferSize; i++) {
-        const white = Math.random() * 2 - 1;
-        if(type==='pink'){
-          // simple pink-ish
-          output[i] = (lastOut + 0.02 * white) / 1.02; lastOut = output[i]; output[i] *= 3.5;
-        } else if(type==='brown'){
-          // brown noise
-          lastOut = (lastOut + (0.02 * white)) / 1.02; output[i] = lastOut * 3.5;
-        } else {
-          output[i] = white;
-        }
-      }
-      const noise = this.ctx.createBufferSource(); noise.buffer = noiseBuffer; noise.loop = true;
-      const g = this.ctx.createGain(); g.gain.value = gain;
-      const p = this.ctx.createStereoPanner(); p.pan.value = pan;
-      const f = this.ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = filterFreq;
-
-      noise.connect(f).connect(g).connect(p).connect(this.master); noise.start();
-
-      // LFO to mimic wind swell
-      let lfoOsc,gainLfo;
-      if(lfo){
-        lfoOsc = this.ctx.createOscillator(); lfoOsc.frequency.value = 0.05;
-        gainLfo = this.ctx.createGain(); gainLfo.gain.value = 0.15 * gain;
-        lfoOsc.connect(gainLfo).connect(g.gain); lfoOsc.start();
-      }
-
-      const node = {kind:'noise', noise, g, p, f, lfoOsc, stop:()=>{try{noise.stop()}catch{} try{lfoOsc?.stop()}catch{}}};
-      this.nodes.add(node);
-      return node;
-    }
-
-    setGain(node, val, sec=0.2){ if(node.g) this.rampParam(node.g.gain, val, sec); if(node.gL) this.rampParam(node.gL.gain, val/2, sec); if(node.gR) this.rampParam(node.gR.gain, val/2, sec); }
-    setPan(node, val, sec=0.2){ if(node.p) this.rampParam(node.p.pan, val, sec); if(node.pL) this.rampParam(node.pL.pan, Math.min(val-0.1,1), sec); if(node.pR) this.rampParam(node.pR.pan, Math.max(val+0.1,-1), sec); }
-    stop(node, sec=0.4){ try{ if(node.g) this.rampParam(node.g.gain, 0.0001, sec); if(node.gL) this.rampParam(node.gL.gain, 0.0001, sec); if(node.gR) this.rampParam(node.gR.gain, 0.0001, sec); setTimeout(()=>{try{node.stop()}catch{} this.nodes.delete(node)}, sec*1000+20);}catch{}}
-  }
-  const engine = new AudioEngine();
-
-  /******************** AFFIRMATIONS & QUOTES ********************/
-  const affirmations = (
-    store.get('seed.affirmations') || [
-      "You are a living prayer.",
-      "Peace begins with your next breath.",
-      "You were born worthy.",
-      "Your heart remembers how to heal.",
-      "You are guided and protected.",
-      "Every breath is a new beginning.",
-      "Grace flows where attention goes.",
-      "You are more than your thoughts.",
-      "Love is your first language.",
-      "Stillness is your strength."
-    ]
-  );
-  const quotes = (
-    store.get('seed.quotes') || [
-      "The kingdom of God is within you. – Luke 17:21",
-      "Be still, and know that I am God. – Psalm 46:10",
-      "Hatred does not cease by hatred, but only by love. – Buddha",
-      "Peace comes from within. Do not seek it without. – Buddha",
-      "When I am afraid, I put my trust in You. – Psalm 56:3",
-      "Let the beauty of what you love be what you do. – Rumi",
-      "Faith can move mountains. – Matthew 17:20",
-      "Thousands of candles can be lit from a single candle. – Buddha",
-      "Love never fails. – 1 Corinthians 13:8",
-      "Suffering is a teacher; compassion is the lesson. – Anonymous"
-    ]
-  );
-
-  function randFrom(arr){ return arr[Math.floor(Math.random()*arr.length)] }
-
-  /******************** REACT APP ********************/
-  const {useState, useEffect, useRef} = React;
-
-  function Toggle({on,label}){ return <span className="pill">{label}: <span className="kbd">{on? 'ON':'OFF'}</span></span> }
-
-  function Range({value,min=0,max=1,step=0.01,onChange}){
-    return <input className="slider" type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(parseFloat(e.target.value))}/>;
-  }
-
-  function Section({title,subtitle,children,actions}){
-    return (
-      <div className="card">
-        <div className="row" style={{justifyContent:'space-between'}}>
-          <div>
-            <div className="title">{title}</div>
-            {subtitle && <div className="subtitle">{subtitle}</div>}
-          </div>
-          {actions}
-        </div>
-        <div style={{height:8}}></div>
-        {children}
-      </div>
-    );
-  }
-
-  function useConfirmExit(ask){
-    useEffect(()=>{
-      const h = (e)=>{ if(ask()){ e.preventDefault(); e.returnValue=''; return '' } };
-      window.addEventListener('beforeunload', h); return ()=>window.removeEventListener('beforeunload', h);
-    },[ask]);
-  }
-
-  function App(){
-    const [tab,setTab]=useState('play');
-    const [accepted,setAccepted]=useState(store.get('legal.accepted', false));
-    const [startMood,setStartMood]=useState(null);
-    const [endMood,setEndMood]=useState(null);
-    const [chakraCycle,setChakraCycle]=useState({running:false,idx:0,progress:0});
-
-    // Ask end‑session mood before close
-    useConfirmExit(()=>{
-      if(startMood && !endMood){ const v = prompt('Before you go – how do you feel now (1–5)?'); if(v){
-        const n = Math.max(1, Math.min(5, parseInt(v,10)||0));
-        store.push('mood', {ts: new Date().toISOString(), value:n, kind:'end'});
-        setEndMood(n);
-      } }
-      return false; // do not block actually
-    });
-
-    useEffect(()=>{ if(!store.get('greeted')){ setTimeout(()=>greet(), 120); } },[]);
-
-    function greet(){
-      alert('Namaste beLOVEd. How do you feel right now? Choose 1–5 (5 is best).');
-      const v = prompt('Mood 1–5 (5 is best)');
-      if(v){ const n = Math.max(1, Math.min(5, parseInt(v,10)||0)); setStartMood(n); store.push('mood',{ts:new Date().toISOString(), value:n, kind:'start'}); }
-      store.set('greeted', true);
-    }
-
-    function endSession(){
-      const v = prompt('How do you feel now between 1 and 5?');
-      if(v){ const n = Math.max(1, Math.min(5, parseInt(v,10)||0)); setEndMood(n); store.push('mood',{ts:new Date().toISOString(), value:n, kind:'end'}); alert('Thank you. Progress saved in Insights.'); }
-    }
-
-    return (
-      <div className="app">
-        <div className="header">
-          <button id="installBtn" className="btn gold" style={{display:'none'}}>Install App</button>
-          <div className="ring"></div>
-          <h1>beLOVEd – Sound, Spirit & Grounding</h1>
-          <span className="chip" title="Theme">Gold • Soft Purple • Silver</span>
-          <button className="btn silver" onClick={endSession}>End Session</button>
-        </div>
-
-        {tab==='play' && <PlayTab/>}
-        {tab==='chakras' && <ChakrasTab chakraCycle={chakraCycle} setChakraCycle={setChakraCycle}/>}      
-        {tab==='mix' && <CustomMix/>}
-        {tab==='breathe' && <BreatheTab/>}
-        {tab==='track' && <TrackerTab/>}
-        {tab==='spirit' && <SpiritualTab/>}
-        {tab==='ground' && <GroundingTab/>}
-        {tab==='schedule' && <ScheduleTab/>}
-        {tab==='insights' && <InsightsTab/>}
-        {tab==='about' && <AboutLegal accepted={accepted} setAccepted={setAccepted}/>}
-
-        <div className="tabbar">
-          <button className="btn" onClick={()=>setTab('play')}>Play</button>
-          <button className="btn" onClick={()=>setTab('chakras')}>Chakras</button>
-          <button className="btn" onClick={()=>setTab('mix')}>Custom Mix</button>
-          <button className="btn" onClick={()=>setTab('breathe')}>Breathe</button>
-          <button className="btn" onClick={()=>setTab('track')}>Daily Tracker</button>
-          <button className="btn" onClick={()=>setTab('spirit')}>Spiritual</button>
-          <button className="btn" onClick={()=>setTab('ground')}>Grounding</button>
-          <button className="btn" onClick={()=>setTab('schedule')}>Schedule</button>
-          <button className="btn" onClick={()=>setTab('insights')}>Insights</button>
-          <button className="btn gold" onClick={()=>setTab('about')}>About & Legal</button>
-        </div>
-      </div>
-    );
-  }
-
-  /******************** TABS ********************/
-  function PlayTab(){
-    const [nodes,setNodes]=useState([]);
-    function addNode(n){ setNodes(prev=>[...prev,n]); }
-    function stopAll(){ engine.stopAll(); setNodes([]); }
-
-    return (
-      <div className="grid cols-3">
-        <Section title="432 Hz Base Tone" subtitle="Warm, centering">
-          <div className="btn-row">
-            <button className="btn purple" onClick={()=>addNode(engine.createTone({hz:432,gain:0.18}))}>Play</button>
-            <button className="btn silver" onClick={()=>stopAll()}>Stop All</button>
-          </div>
-        </Section>
-        <Section title="Solfeggio 528 Hz" subtitle="Heart coherence">
-          <div className="btn-row">
-            <button className="btn purple" onClick={()=>addNode(engine.createTone({hz:528,gain:0.18}))}>Play</button>
-            <button className="btn silver" onClick={()=>engine.stopAll()}>Stop</button>
-          </div>
-        </Section>
-        <Section title="Ocean Waves" subtitle="Brown noise + swell">
-          <div className="btn-row">
-            <button className="btn purple" onClick={()=>addNode(engine.createNoise({type:'brown',gain:0.18,lfo:true,filterFreq:900}))}>Play</button>
-            <button className="btn silver" onClick={()=>engine.stopAll()}>Stop</button>
-          </div>
-        </Section>
-        <Section title="Soft Rain" subtitle="Pink noise + gentle LPF">
-          <div className="btn-row">
-            <button className="btn purple" onClick={()=>addNode(engine.createNoise({type:'pink',gain:0.14,filterFreq:2000}))}>Play</button>
-            <button className="btn silver" onClick={()=>engine.stopAll()}>Stop</button>
-          </div>
-        </Section>
-        <Section title="Forest Wind" subtitle="Pink noise + slow LFO">
-          <div className="btn-row">
-            <button className="btn purple" onClick={()=>addNode(engine.createNoise({type:'pink',gain:0.12,lfo:true,filterFreq:1500}))}>Play</button>
-            <button className="btn silver" onClick={()=>engine.stopAll()}>Stop</button>
-          </div>
-        </Section>
-        <Section title="Binaural Calm" subtitle="440±5 Hz left/right">
-          <div className="btn-row">
-            <button className="btn purple" onClick={()=>addNode(engine.createTone({hz:440,gain:0.14,binauralOffsetHz:5}))}>Play</button>
-            <button className="btn silver" onClick={()=>engine.stopAll()}>Stop</button>
-          </div>
-        </Section>
-      </div>
-    );
-  }
-
-  function ChakrasTab({chakraCycle,setChakraCycle}){
-    const list = Object.entries(chakraHz);
-    function play(hz){ engine.createTone({hz, gain:0.16}); }
-
-    async function playAll(){
-      if(chakraCycle.running) return;
-      setChakraCycle({running:true,idx:0,progress:0});
-      for(let i=0;i<list.length;i++){
-        setChakraCycle({running:true,idx:i,progress:i/list.length});
-        const hz=list[i][1]; const n=engine.createTone({hz,gain:0.16});
-        await new Promise(r=>setTimeout(r, 60*1000)); // 60s each
-        engine.stop(n,0.3);
-      }
-      setChakraCycle({running:false,idx:list.length-1,progress:1});
-    }
-
-    return (
-      <div className="grid cols-2">
-        {list.map(([name,hz],i)=>
-          <Section key={name} title={`${name}`} subtitle={`${hz} Hz`} actions={<span className="pill">#{i+1}</span>}>
-            <div className="btn-row">
-              <button className="btn purple" onClick={()=>play(hz)}>Play {hz} Hz</button>
-              <button className="btn silver" onClick={()=>engine.stopAll()}>Stop</button>
-            </div>
-          </Section>
-        )}
-        <Section title="Play All Chakras" subtitle="7-minute cycle (1 min each)">
-          <div className="btn-row">
-            <button className="btn gold" onClick={playAll} disabled={chakraCycle.running}>{chakraCycle.running? 'Running…':'Start Cycle'}</button>
-            <button className="btn silver" onClick={()=>engine.stopAll()}>Stop All</button>
-          </div>
-          <div style={{height:10}}></div>
-          <div className="progress"><span style={{width:(chakraCycle.progress*100)+'%'}}></span></div>
-        </Section>
-      </div>
-    );
-  }
-
-  function CustomMix(){
-    const [layers,setLayers]=useState([]);
-
-    function addTone(){
-      const hz = parseFloat(prompt('Enter frequency in Hz (e.g., 528):')||'528');
-      const type = prompt('Waveform: sine | triangle | square | sawtooth','sine')||'sine';
-      const node = engine.createTone({hz,type,gain:0.14});
-      setLayers(l=>[...l,{id:crypto.randomUUID(),kind:'tone',hz,type,node,gain:0.14,pan:0}]);
-    }
-    function addOcean(){ const node=engine.createNoise({type:'brown',gain:0.16,lfo:true,filterFreq:900}); setLayers(l=>[...l,{id:crypto.randomUUID(),kind:'ocean',node,gain:0.16,pan:0}]); }
-    function addRain(){ const node=engine.createNoise({type:'pink',gain:0.12,filterFreq:1800}); setLayers(l=>[...l,{id:crypto.randomUUID(),kind:'rain',node,gain:0.12,pan:0}]); }
-
-    function setGain(i,val){ const L=[...layers]; L[i].gain=val; engine.setGain(L[i].node,val); setLayers(L); }
-    function setPan(i,val){ const L=[...layers]; L[i].pan=val; engine.setPan(L[i].node,val); setLayers(L); }
-    function remove(i){ const L=[...layers]; const x=L.splice(i,1)[0]; engine.stop(x.node,0.2); setLayers(L); }
-    function stopAll(){ engine.stopAll(); setLayers([]); }
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Add Layers" subtitle="Build your healing mix">
-          <div className="btn-row">
-            <button className="btn purple" onClick={addTone}>+ Tone (Hz)</button>
-            <button className="btn purple" onClick={addOcean}>+ Ocean</button>
-            <button className="btn purple" onClick={addRain}>+ Rain</button>
-            <button className="btn silver" onClick={stopAll}>Stop All</button>
-          </div>
-        </Section>
-        {layers.map((L,i)=>
-          <Section key={L.id} title={`${L.kind==='tone'? `${L.hz} Hz (${L.type})`:L.kind}`} subtitle="Gain & Pan">
-            <div className="row">
-              <div style={{minWidth:80}}>Gain</div>
-              <Range value={L.gain} onChange={(v)=>setGain(i,v)} />
-            </div>
-            <div className="row">
-              <div style={{minWidth:80}}>Pan</div>
-              <Range value={L.pan} min={-1} max={1} step={0.01} onChange={(v)=>setPan(i,v)} />
-            </div>
-            <div className="btn-row"><button className="btn silver" onClick={()=>remove(i)}>Remove</button></div>
-          </Section>
-        )}
-      </div>
-    );
-  }
-
-  function BreatheTab(){
-    const [phase,setPhase]=useState('ready');
-    const [dur,setDur]=useState({inhale:4,hold:7,exhale:8});
-    const timerRef = useRef(null);
-    const [progress,setProgress]=useState(0);
-
-    function start(){ clearInterval(timerRef.current); setPhase('inhale'); let t=0; const total=dur.inhale+dur.hold+dur.exhale; timerRef.current=setInterval(()=>{
-        t++; const p=t%total; const s=p; if(s<dur.inhale) setPhase('inhale'); else if(s<dur.inhale+dur.hold) setPhase('hold'); else setPhase('exhale'); setProgress((s/total));
-    },1000); }
-    function stop(){ clearInterval(timerRef.current); setPhase('ready'); setProgress(0); }
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Guided Breathing 4–7–8" subtitle="Inhale belly 4 • Hold 7 • Exhale mouth 8">
-          <div className="row">
-            <span className="pill">Phase: <b style={{marginLeft:6}}>{phase}</b></span>
-            <span className="pill">In {dur.inhale}s • Hold {dur.hold}s • Out {dur.exhale}s</span>
-          </div>
-          <div style={{height:12}}></div>
-          <div className="progress"><span style={{width:(progress*100)+'%'}}></span></div>
-          <div style={{height:12}}></div>
-          <div className="btn-row">
-            <button className="btn purple" onClick={start}>Start</button>
-            <button className="btn silver" onClick={stop}>Stop</button>
-          </div>
-        </Section>
-        <Section title="Customize Counts" subtitle="Tap numbers to edit">
-          <div className="btn-row">
-            <button className="btn" onClick={()=>setDur(d=>({...d, inhale: parseInt(prompt('Inhale seconds', d.inhale)||d.inhale)}))}>Inhale: {dur.inhale}</button>
-            <button className="btn" onClick={()=>setDur(d=>({...d, hold: parseInt(prompt('Hold seconds', d.hold)||d.hold)}))}>Hold: {dur.hold}</button>
-            <button className="btn" onClick={()=>setDur(d=>({...d, exhale: parseInt(prompt('Exhale seconds', d.exhale)||d.exhale)}))}>Exhale: {dur.exhale}</button>
-          </div>
-        </Section>
-      </div>
-    );
-  }
-
-  function TrackerTab(){
-    const today = new Date().toISOString().slice(0,10);
-    const [morning,setMorning]=useState(store.get('track.'+today+'.morning',''));
-    const [evening,setEvening]=useState(store.get('track.'+today+'.evening',''));
-
-    function save(){
-      store.set('track.'+today+'.morning', morning);
-      store.set('track.'+today+'.evening', evening);
-      alert('Saved.');
-    }
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Morning" subtitle="What can I do today to make myself happy?">
-          <textarea rows={4} style={{width:'100%'}} value={morning} onChange={(e)=>setMorning(e.target.value)} />
-        </Section>
-        <Section title="Evening" subtitle="What did you do today to make you happy and what made you smile?">
-          <textarea rows={4} style={{width:'100%'}} value={evening} onChange={(e)=>setEvening(e.target.value)} />
-        </Section>
-        <div className="card">
-          <div className="btn-row"><button className="btn gold" onClick={save}>Save Today</button></div>
-          <div className="small muted" style={{marginTop:6}}>Entries are stored locally on your device.</div>
-        </div>
-      </div>
-    );
-  }
-
-  function SpiritualTab(){
-    const [lastAff,setLastAff]=useState(store.get('spirit.lastAff'));
-    const [lastQuote,setLastQuote]=useState(store.get('spirit.lastQuote'));
-
-    function newAff(){ const a = randFrom(affirmations); setLastAff(a); store.set('spirit.lastAff', a); }
-    function newQuote(){ const q = randFrom(quotes); setLastQuote(q); store.set('spirit.lastQuote', q); }
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Daily Reminder" subtitle="You are amazing – receive a loving truth">
-          <div className="btn-row">
-            <button className="btn purple" onClick={newAff}>Give me my reminder</button>
-          </div>
-          {lastAff && <p className="chip" style={{marginTop:10}}>{lastAff}</p>}
-        </Section>
-        <Section title="Blessing Quotes" subtitle="Includes religious & Buddhist quotes">
-          <div className="btn-row">
-            <button className="btn purple" onClick={newQuote}>Give me a blessing</button>
-          </div>
-          {lastQuote && <p className="chip" style={{marginTop:10}}>{lastQuote}</p>}
-        </Section>
-      </div>
-    );
-  }
-
-  function GroundingTab(){
-    const [sec,setSec]=useState(7*60);
-    const [running,setRunning]=useState(false);
-    const tRef = useRef(null);
-
-    function start(){ setRunning(true); clearInterval(tRef.current); tRef.current=setInterval(()=>setSec(s=>{
-      if(s<=1){ clearInterval(tRef.current); setRunning(false); alert('Grounding complete. How do you feel?'); return 7*60; } return s-1; }),1000); }
-    function stop(){ clearInterval(tRef.current); setRunning(false); }
-
-    const m = Math.floor(sec/60), s = (sec%60).toString().padStart(2,'0');
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Earthing Practice" subtitle="Bare feet on natural, safe ground for 7 minutes. If possible, touch or hug a tree.">
-          <div className="btn-row">
-            <button className="btn gold" onClick={start} disabled={running}>Start 7:00</button>
-            <button className="btn silver" onClick={stop}>Stop</button>
-          </div>
-          <div style={{fontSize:'2rem',marginTop:8}}>{m}:{s}</div>
-        </Section>
-        <Section title="Optional Ambient" subtitle="Soft wind while you ground">
-          <div className="btn-row">
-            <button className="btn purple" onClick={()=>engine.createNoise({type:'pink',gain:0.08,lfo:true,filterFreq:1500})}>Play Wind</button>
-            <button className="btn silver" onClick={()=>engine.stopAll()}>Stop Ambience</button>
-          </div>
-        </Section>
-      </div>
-    );
-  }
-
-  function ScheduleTab(){
-    const [items,setItems]=useState(store.get('reminders', []));
-
-    async function add(){
-      const label = prompt('Label', 'Breath Break') || 'Breath Break';
-      const time = prompt('Time (24h HH:MM)', '10:00') || '10:00';
-      const it = {id:crypto.randomUUID(), label, time, enabled:true};
-      const next = [...items, it]; setItems(next); store.set('reminders', next);
-      try{ const ok = await Notification.requestPermission(); if(ok!=='granted') alert('Notifications not granted. The app will use in‑app rings.'); }catch{}
-    }
-    function toggle(id){ const next=items.map(x=>x.id===id? {...x,enabled:!x.enabled}:x); setItems(next); store.set('reminders', next); }
-    function remove(id){ const next=items.filter(x=>x.id!==id); setItems(next); store.set('reminders', next); }
-
-    // tick every minute (demo: every 10s)
-    useEffect(()=>{
-      const iv=setInterval(()=>{
-        const now=new Date(); const hh=String(now.getHours()).padStart(2,'0'); const mm=String(now.getMinutes()).padStart(2,'0');
-        const key=`${hh}:${mm}`;
-        items.filter(x=>x.enabled && x.time===key).forEach(x=>{
-          try{ new Notification(x.label+" – Breathe 4‑7‑8 now ✨"); }catch{ alert(x.label+" – Breathe 4‑7‑8 now ✨"); }
-        });
-      }, 10*1000);
-      return ()=>clearInterval(iv);
-    },[items]);
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Reminders" subtitle="Set times to pause and breathe">
-          <div className="btn-row"><button className="btn gold" onClick={add}>+ Add Reminder</button></div>
-          <div style={{height:8}}></div>
-          {items.length===0 && <div className="muted">No reminders yet.</div>}
-          {items.map(x=>
-            <div key={x.id} className="row" style={{justifyContent:'space-between'}}>
-              <div className="chip">{x.time} – {x.label}</div>
-              <div className="btn-row">
-                <button className="btn" onClick={()=>toggle(x.id)}>{x.enabled? 'Disable':'Enable'}</button>
-                <button className="btn silver" onClick={()=>remove(x.id)}>Delete</button>
-              </div>
-            </div>
-          )}
-        </Section>
-        <Section title="Daily Spiritual Reminder" subtitle="Receive a loving affirmation once per day">
-          <div className="small muted">Use your phone's notification settings to allow alerts from this site for best results.</div>
-        </Section>
-      </div>
-    );
-  }
-
-  function InsightsTab(){
-    const mood = store.get('mood', []);
-    const starts = mood.filter(m=>m.kind==='start');
-    const ends = mood.filter(m=>m.kind==='end');
-    const avg = arr=>arr.reduce((a,b)=>a+b,0)/(arr.length||1);
-    const avgStart = avg(starts.map(m=>m.value)).toFixed(2);
-    const avgEnd = avg(ends.map(m=>m.value)).toFixed(2);
-
-    // Simple self-tests ("test cases") to validate core features in the browser
-    const tests = [];
-    try{ tests.push({name:'React present', pass: !!window.React}); }catch{ tests.push({name:'React present', pass:false}); }
-    try{ const ok = !!(window.AudioContext||window.webkitAudioContext); tests.push({name:'Web Audio support', pass: ok}); }catch{ tests.push({name:'Web Audio support', pass:false}); }
-    try{ store.set('__t', {a:1}); const v = store.get('__t'); tests.push({name:'LocalStorage JSON roundtrip', pass: v && v.a===1}); }catch{ tests.push({name:'LocalStorage JSON roundtrip', pass:false}); }
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Mood Averages" subtitle="Session start vs. end">
-          <div className="chip">Start Avg: {avgStart}</div>
-          <div className="chip">End Avg: {avgEnd}</div>
-          <div className="small muted" style={{marginTop:8}}>Tip: end each session with the mood check to see your progress.</div>
-        </Section>
-        <Section title="Counts" subtitle="How often you practice">
-          <div className="chip">Start entries: {starts.length}</div>
-          <div className="chip">End entries: {ends.length}</div>
-        </Section>
-        <Section title="Diagnostics (Self‑Test)" subtitle="Browser capability checks">
-          {tests.map((t,i)=> <div key={i} className="chip" style={{borderColor:t.pass? 'var(--ok)':'#e66'}}>{t.pass?'✅':'❌'} {t.name}</div>)}
-          <div className="small muted" style={{marginTop:8}}>If a test fails, some features may not work in this browser/device.</div>
-        </Section>
-      </div>
-    );
-  }
-
-  function AboutLegal({accepted,setAccepted}){
-    function openYT(){ window.open('https://www.youtube.com/@aurora-ute','_blank') }
-
-    return (
-      <div className="grid cols-2">
-        <Section title="Creator" subtitle="Connect & support">
-          <p>Created by <b>Rev. AURorA Ute</b>. Search for <b>AURorA Ute</b> or <b>Soul Unfiltered</b> on social media.</p>
-          <div className="btn-row">
-            <button className="btn gold" onClick={openYT}>Open YouTube</button>
-          </div>
-          <p className="small muted">To support my work, please spend 3 minutes watching two videos on YouTube. Thank you! 💛</p>
-        </Section>
-        <Section title="Important Notice & Informed Consent" subtitle="Please read carefully">
-          <div style={{maxHeight:220,overflow:'auto',border:'1px solid #ffffff22',padding:10,borderRadius:12}}>
-            <p><b>Not medical care:</b> This app is provided by <b>Rev. AURorA Ute</b> for relaxation, wellbeing, and spiritual support. It <b>does not diagnose, treat, cure, or prevent</b> any disease or condition and is <b>not a substitute</b> for professional medical advice or therapy.</p>
-            <p><b>Self‑responsibility & waiver:</b> By using this app, <b>you agree</b> that you are fully and solely responsible for your health, safety, choices, and results. <b>Rev. AURorA Ute is not responsible or liable for any outcome</b>—direct or indirect—arising from use or non‑use of this app. <b>By continuing, you use this app of your own free will and you waive all rights to make any claim</b> against the provider/creator regarding your use.</p>
-            <p><b>Emergency:</b> If you are in crisis or experiencing a medical or mental‑health emergency, call your local emergency number immediately.</p>
-            <p><b>Privacy:</b> Your entries are stored locally on your device unless you export them.</p>
-            <p><b>Audio safety:</b> Start at low volume. Stop if you feel discomfort. Do not use while driving or in hazardous situations.</p>
-          </div>
-          <div className="btn-row" style={{marginTop:10}}>
-            <button className="btn" onClick={()=>{setAccepted(true);store.set('legal.accepted',true);}}>I Understand & Agree</button>
-          </div>
-          {!accepted && <div className="small" style={{color:'#ffcf66'}}>You must accept to use all features.</div>}
-        </Section>
-      </div>
-    );
-  }
-
-  /******************** MOUNT ********************/
-  ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
-
-  /******************** PWA: Manifest + Service Worker ********************/
-  (function(){
-    // 1) Create a runtime Manifest as a Blob so we keep a single-file build
-    const manifest = {
-      name: "beLOVEd – Sound, Spirit & Grounding",
-      short_name: "beLOVEd",
-      start_url: ".",
-      scope: ".",
-      display: "standalone",
-      background_color: "#40296b",
-      theme_color: "#6d4aa1",
-      description: "Wellbeing app with healing sounds, chakras, breathing, grounding, reminders, and spiritual quotes.",
-      icons: [
-        { src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop stop-color='%236d4aa1'/><stop offset='1' stop-color='%23d4af37'/></linearGradient></defs><rect width='256' height='256' rx='48' fill='url(%23g)'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-size='120' fill='white' font-family='Arial, Helvetica, sans-serif'>❤</text></svg>", sizes: "256x256", type: "image/svg+xml", purpose: "any" }
-      ]
+    const SOLFEGGIO = {
+      174: { name: "174 Hz", desc: "grounding, comfort (anecdotal)" },
+      285: { name: "285 Hz", desc: "stability & renewal (anecdotal)" },
+      396: { name: "396 Hz", desc: "release fear/guilt (anecdotal)" },
+      417: { name: "417 Hz", desc: "facilitate change (anecdotal)" },
+      528: { name: "528 Hz", desc: "transformation/love (anecdotal)" },
+      639: { name: "639 Hz", desc: "relationships/harmony (anecdotal)" },
+      741: { name: "741 Hz", desc: "expression/clarity (anecdotal)" },
+      852: { name: "852 Hz", desc: "awareness/intuition (anecdotal)" },
+      963: { name: "963 Hz", desc: "oneness/crown (anecdotal)" },
     };
-    const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
-    const manifestURL = URL.createObjectURL(manifestBlob);
-    const link = document.createElement('link');
-    link.rel = 'manifest';
-    link.href = manifestURL;
-    document.head.appendChild(link);
 
-    // 2) Install prompt button
-    let deferred; const installBtn = document.getElementById('installBtn');
-    window.addEventListener('beforeinstallprompt', (e)=>{
-      e.preventDefault(); deferred = e; if(installBtn) installBtn.style.display='inline-flex';
-    });
-    installBtn?.addEventListener('click', async ()=>{ try{ await deferred.prompt(); }catch{} });
+    const CHAKRAS = [
+      { key: "root",   label: "Root",          color: "#b71c1c", freq: 396 },
+      { key: "sacral", label: "Sacral",        color: "#ef6c00", freq: 417 },
+      { key: "solar",  label: "Solar Plexus",  color: "#d4a017", freq: 528 },
+      { key: "heart",  label: "Heart",         color: "#2e7d32", freq: 639 },
+      { key: "throat", label: "Throat",        color: "#1e88e5", freq: 741 },
+      { key: "third",  label: "Third Eye",     color: "#5e35b1", freq: 852 },
+      { key: "crown",  label: "Crown",         color: "#6a1b9a", freq: 963 },
+    ];
 
-    // 3) Service Worker: build from a Blob and register
-    if('serviceWorker' in navigator){
-      const swCode = `
-        const CACHE = 'beloved-v1';
-        const CORE = [ './' ];
-        self.addEventListener('install', (e)=>{
-          e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));
-        });
-        self.addEventListener('activate', (e)=>{
-          e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
-          self.clients.claim();
-        });
-        // Stale-while-revalidate for all requests
-        self.addEventListener('fetch', (e)=>{
-          const req = e.request;
-          e.respondWith(
-            caches.match(req).then(cached=>{
-              const fetchPromise = fetch(req).then(res=>{
-                const resClone = res.clone();
-                caches.open(CACHE).then(c=>c.put(req, resClone)).catch(()=>{});
-                return res;
-              }).catch(()=> cached );
-              return cached || fetchPromise;
-            })
-          );
-        });
-      `;
-      const blob = new Blob([swCode], {type:'text/javascript'});
-      const swURL = URL.createObjectURL(blob);
-      navigator.serviceWorker.register(swURL).catch(()=>{});
+    const MOOD_PRESETS = {
+      "Calm":      { freq: 528, binauralHz: 0,  label: "Calm → 528 Hz" },
+      "Happy":     { freq: 528, binauralHz: 0,  label: "Happy → 528 Hz" },
+      "Sad":       { freq: 528, binauralHz: 4,  label: "Sad → 528 Hz + 4 Hz (theta)" },
+      "Anxious":   { freq: 396, binauralHz: 4,  label: "Anxious → 396 Hz + 4 Hz" },
+      "Angry":     { freq: 741, binauralHz: 10, label: "Angry → 741 Hz + 10 Hz (alpha)" },
+      "Tired":     { freq: 174, binauralHz: 2,  label: "Tired → 174 Hz + 2 Hz (delta)" },
+      "Unfocused": { freq: 852, binauralHz: 15, label: "Unfocused → 852 Hz + 15 Hz (beta)" },
+    };
+
+    const AFFIRMATIONS = {
+      Sad: ["I give myself permission to feel and to heal.","I am held in love as I move through this."],
+      Anxious: ["I breathe in calm; I breathe out tension.","In this moment, I am safe and present."],
+      Angry: ["I release what I cannot control.","I choose clarity and compassion now."],
+      Tired: ["Rest is productive; my body is wise.","I soften and allow renewal."],
+      Calm: ["Peace expands with every breath."],
+      Happy: ["I savor this joy and let it ripple out."],
+      Unfocused: ["I return gently to what matters."],
+    };
+
+    const SCENES = [
+      { key:"Sleep",   desc:"Deep rest: 174 Hz + delta 2 Hz",      cfg:{freq:174,binauralHz:2} },
+      { key:"Focus",   desc:"Clear mind: 852 Hz + beta 15 Hz",     cfg:{freq:852,binauralHz:15} },
+      { key:"Release", desc:"Let go: 396 Hz + theta 4 Hz",          cfg:{freq:396,binauralHz:4} },
+      { key:"Heart",   desc:"Open heart: 639 Hz (no binaural)",     cfg:{freq:639,binauralHz:0} },
+    ];
+
+    /* ========================= Audio Engine ========================= */
+    class AudioEngine {
+      constructor(){
+        this.ctx=null; this.master=null; this.running=false;
+        this.tone=null; this.toneGain=null;
+        this.left=null; this.right=null; this.leftGain=null; this.rightGain=null;
+        this.noise=null; this.noiseGain=null;
+      }
+      async ensure(){
+        if(!this.ctx){
+          const AC = window.AudioContext || window.webkitAudioContext; this.ctx = new AC();
+          this.master = this.ctx.createGain(); this.master.gain.value = 0.6; this.master.connect(this.ctx.destination);
+        }
+        if(this.ctx.state === 'suspended') await this.ctx.resume();
+      }
+      setMaster(v){ if(this.master) this.master.gain.value = v; }
+      stop(){
+        const kill = (n)=>{ if(n){ try{n.stop()}catch{} n.disconnect() } };
+        kill(this.tone); this.tone=null; if(this.toneGain){this.toneGain.disconnect(); this.toneGain=null}
+        kill(this.left); kill(this.right); this.left=this.right=null; if(this.leftGain){this.leftGain.disconnect(); this.leftGain=null} if(this.rightGain){this.rightGain.disconnect(); this.rightGain=null}
+        kill(this.noise); this.noise=null; if(this.noiseGain){this.noiseGain.disconnect(); this.noiseGain=null}
+        this.running=false;
+      }
+      async play({freq=528, binauralHz=0, toneVolume=.85, noiseVolume=0, wave='sine'}){
+        await this.ensure(); this.stop();
+        // main tone
+        this.tone = this.ctx.createOscillator(); this.tone.type=wave; this.tone.frequency.value=freq;
+        this.toneGain = this.ctx.createGain(); this.toneGain.gain.value=toneVolume;
+        this.tone.connect(this.toneGain).connect(this.master); this.tone.start();
+        // binaural
+        if(binauralHz>0){
+          const L=this.ctx.createOscillator(), R=this.ctx.createOscillator(); L.type=wave; R.type=wave;
+          L.frequency.value=freq - binauralHz/2; R.frequency.value=freq + binauralHz/2;
+          const gL=this.ctx.createGain(), gR=this.ctx.createGain(); gL.gain.value=toneVolume*.5; gR.gain.value=toneVolume*.5;
+          const panL=this.ctx.createStereoPanner(); panL.pan.value=-1; const panR=this.ctx.createStereoPanner(); panR.pan.value=1;
+          L.connect(gL).connect(panL).connect(this.master); R.connect(gR).connect(panR).connect(this.master);
+          L.start(); R.start(); this.left=L; this.right=R; this.leftGain=gL; this.rightGain=gR;
+        }
+        // white noise (gentle)
+        if(noiseVolume>0){
+          const size=2*this.ctx.sampleRate, buf=this.ctx.createBuffer(1,size,this.ctx.sampleRate), d=buf.getChannelData(0);
+          for(let i=0;i<size;i++) d[i]=Math.random()*2-1;
+          const src=this.ctx.createBufferSource(); src.buffer=buf; src.loop=true;
+          const g=this.ctx.createGain(); g.gain.value=noiseVolume;
+          const lp=this.ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=2000;
+          src.connect(lp).connect(g).connect(this.master); src.start(); this.noise=src; this.noiseGain=g;
+        }
+        this.running=true;
+      }
     }
-  })();
+
+    const useAudio = ()=>{ const r=useRef(null); if(!r.current) r.current=new AudioEngine(); return r.current };
+
+    /* ========================= Components ========================= */
+    function BreathingCoach(){
+      const [phase,setPhase] = useState('In'); // In → Hold → Out
+      useEffect(()=>{
+        let t=0; const id=setInterval(()=>{
+          // 4-6-8 pattern
+          t = (t+1)%18; // seconds in cycle
+          if(t<4) setPhase('In'); else if(t<10) setPhase('Hold'); else setPhase('Out');
+        },1000);
+        return ()=>clearInterval(id);
+      },[]);
+      return (
+        <div className="flex items-center gap-4">
+          <div className={`breath-circle ${phase==='In'?'breath-in':phase==='Hold'?'breath-hold':'breath-out'}`}></div>
+          <div>
+            <div className="text-sm font-semibold">Breathing Coach</div>
+            <div className="text-xs opacity-80">4s In • 6s Hold • 8s Out</div>
+            <div className="mt-1 text-sm">Now: <span className="font-semibold">{phase}</span></div>
+          </div>
+        </div>
+      );
+    }
+
+    function ConsentBanner({onEnable}){
+      const [open,setOpen] = useState(true);
+      if(!open) return null;
+      return (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-20 max-w-3xl w-[95%]">
+          <div className="glass rounded-2xl p-4 shadow-lg">
+            <div className="text-sm">
+              <strong>Wellness Notice.</strong> This app is for relaxation, education, and self‑reflection only. It is not medical or psychological treatment. Listen comfortably and stop if you feel discomfort.
+            </div>
+            <div className="mt-2 flex flex-wrap gap-3">
+              <button className="btn bg-emerald-700 text-white hover:bg-emerald-600" onClick={async()=>{await onEnable(); setOpen(false);}}>I Understand • Enable Audio</button>
+              <button className="btn bg-slate-800 text-white hover:bg-slate-700" onClick={()=>setOpen(false)}>Dismiss</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    /* ========================= Main App ========================= */
+    function App(){
+      const engine = useAudio();
+      const [tab,setTab] = useState('Diary');
+      const [entries,setEntries] = useState(()=>{ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch{return []} });
+      const [mood,setMood] = useState('Calm');
+      const [notes,setNotes] = useState('');
+      const [happy,setHappy] = useState('');
+      const [sad,setSad] = useState('');
+      const [minutes,setMinutes] = useState(12);
+      const [masterVol,setMasterVol] = useState(.65);
+      const [toneVol,setToneVol] = useState(.85);
+      const [noiseVol,setNoiseVol] = useState(0);
+      const [wave,setWave] = useState('sine');
+      const [playing,setPlaying] = useState(false);
+      const [left,setLeft] = useState(0);
+      const [audioReady,setAudioReady] = useState(false);
+
+      useEffect(()=>localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)),[entries]);
+      useEffect(()=>engine.setMaster(masterVol),[engine,masterVol]);
+      useEffect(()=>{ if(!playing||left<=0) return; const id=setInterval(()=>setLeft(t=>{ if(t<=1){stop(); return 0} return t-1 }),1000); return ()=>clearInterval(id) },[playing,left]);
+
+      const preset = useMemo(()=> MOOD_PRESETS[mood] || MOOD_PRESETS['Calm'], [mood]);
+
+      function save(){
+        const entry={id:crypto.randomUUID(),date:new Date().toISOString(),mood,notes,happy,sad,preset};
+        setEntries(p=>[entry,...p]); setNotes(''); setHappy(''); setSad('');
+      }
+      async function ensureAudio(){ await engine.ensure(); setAudioReady(true); }
+      async function playAuto(){ if(!audioReady) await ensureAudio(); await engine.play({freq:preset.freq,binauralHz:preset.binauralHz,toneVolume:toneVol,noiseVolume:noiseVol,wave}); setPlaying(true); setLeft(Math.max(1,Math.floor(minutes*60))); }
+      async function playChakra(freq){ if(!audioReady) await ensureAudio(); await engine.play({freq,binauralHz:0,toneVolume:toneVol,noiseVolume:noiseVol,wave}); setPlaying(true); setLeft(Math.max(1,Math.floor(minutes*60))); }
+      async function playScene(cfg){ if(!audioReady) await ensureAudio(); await engine.play({...cfg,toneVolume:toneVol,noiseVolume:noiseVol,wave}); setPlaying(true); setLeft(Math.max(1,Math.floor(minutes*60))); }
+      function stop(){ engine.stop(); setPlaying(false); }
+
+      function exportJSON(){ const b=new Blob([JSON.stringify(entries,null,2)],{type:'application/json'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download=`solfeggio-journal-${new Date().toISOString().slice(0,10)}.json`; a.click(); URL.revokeObjectURL(u); }
+      function importJSON(e){ const f=e.target.files?.[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{const d=JSON.parse(String(r.result||'[]')); if(Array.isArray(d)) setEntries(d)}catch{} }; r.readAsText(f); }
+
+      const affKey = (mood==='Sad'?'Sad':mood==='Anxious'?'Anxious':mood==='Angry'?'Angry':mood==='Tired'?'Tired':mood==='Unfocused'?'Unfocused':mood==='Happy'?'Happy':'Calm');
+      const todaysAff = (AFFIRMATIONS[affKey]||[])[0] || '';
+
+      return (
+        <div className="min-h-screen relative">
+          <header className="glass sticky top-0 z-10">
+            <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-extrabold brand">Solfeggio Healing Companion</h1>
+                <p className="text-sm opacity-80">By Rev. AURorA Ute — Certified Hypnotist & Spiritual Life Coach</p>
+              </div>
+              <nav className="flex flex-wrap gap-2 text-sm font-semibold">
+                {['Diary','Session','Chakras','Library','About'].map(t=> (
+                  <button key={t} onClick={()=>setTab(t)} className={`px-3 py-2 rounded-lg ${tab===t?'bg-white/70':'hover:bg-white/50'}`}>{t}</button>
+                ))}
+              </nav>
+            </div>
+          </header>
+
+          <main className="max-w-6xl mx-auto px-6 py-8 space-y-8">
+            {/* Hero */}
+            <section className="glass rounded-2xl p-6 md:p-8">
+              <div className="grid md:grid-cols-3 gap-6 items-center">
+                <div className="md:col-span-2">
+                  <h2 className="text-xl md:text-2xl font-bold">Daily balance through sound, breath, and reflection.</h2>
+                  <p className="mt-2 text-sm opacity-80">Professional, privacy-first experience: your journal stays on your device. Choose a mood and let the app suggest supportive Solfeggio frequencies and optional binaural beats.</p>
+                  {todaysAff && (
+                    <div className="mt-4 text-sm bg-white/70 rounded-xl px-4 py-3 border border-white">🌿 <em>Affirmation:</em> {todaysAff}</div>
+                  )}
+                </div>
+                <div className="rounded-xl bg-white/60 border border-white p-4 flex items-center justify-center">
+                  <BreathingCoach/>
+                </div>
+              </div>
+            </section>
+
+            {tab==='Diary' && (
+              <section className="grid md:grid-cols-2 gap-6">
+                <div className="glass rounded-2xl p-6">
+                  <h3 className="text-lg font-semibold">Daily Diary</h3>
+                  <div className="mt-3 grid gap-3">
+                    <label className="text-sm">Mood</label>
+                    <select value={mood} onChange={e=>setMood(e.target.value)} className="bg-white/70 rounded-xl p-2 outline-none">
+                      {Object.keys(MOOD_PRESETS).map(m=> <option key={m} value={m}>{m}</option>)}
+                    </select>
+                    <p className="text-xs opacity-80">Suggested: <span className="font-medium">{preset.label}</span></p>
+
+                    <label className="text-sm mt-2">What are your thoughts today?</label>
+                    <textarea value={notes} onChange={e=>setNotes(e.target.value)} rows={5} className="bg-white/70 rounded-xl p-3 outline-none" placeholder="Write freely; no judgment." />
+
+                    <label className="text-sm">What made you happy?</label>
+                    <input value={happy} onChange={e=>setHappy(e.target.value)} className="bg-white/70 rounded-xl p-2 outline-none" placeholder="A small moment, a smile, nature..." />
+
+                    <label className="text-sm">What felt sad or heavy?</label>
+                    <input value={sad} onChange={e=>setSad(e.target.value)} className="bg-white/70 rounded-xl p-2 outline-none" placeholder="Name it gently." />
+
+                    <div className="flex flex-wrap gap-3 mt-3">
+                      <button onClick={save} className="btn bg-emerald-700 text-white hover:bg-emerald-600">Save Entry</button>
+                      {!playing ? (
+                        <button onClick={playAuto} className="btn bg-indigo-700 text-white hover:bg-indigo-600">Start Healing</button>
+                      ) : (
+                        <button onClick={stop} className="btn bg-rose-700 text-white hover:bg-rose-600">Stop</button>
+                      )}
+                    </div>
+                    {playing && <p className="text-xs opacity-80">Playing • {left}s left</p>}
+                    <p className="text-[11px] opacity-70 mt-2">Tip: lower volume if you notice tension; add a little white noise on the <em>Session</em> tab.</p>
+                  </div>
+                </div>
+
+                <div className="glass rounded-2xl p-6">
+                  <h3 className="text-lg font-semibold">Your Journal</h3>
+                  {entries.length===0 ? (
+                    <p className="text-sm opacity-80 mt-2">No entries yet. Write your first reflection and press <em>Save Entry</em>.</p>
+                  ) : (
+                    <div className="mt-3 overflow-x-auto">
+                      <table className="min-w-full text-sm">
+                        <thead>
+                          <tr className="text-left opacity-80">
+                            <th className="py-2 pr-4">Date</th>
+                            <th className="py-2 pr-4">Mood</th>
+                            <th className="py-2 pr-4">Preset</th>
+                            <th className="py-2 pr-4">Happy</th>
+                            <th className="py-2 pr-4">Sad/Heavy</th>
+                            <th className="py-2 pr-4">Notes</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {entries.map(e=> (
+                            <tr key={e.id} className="border-top border-white">
+                              <td className="py-2 pr-4 whitespace-nowrap">{new Date(e.date).toLocaleString()}</td>
+                              <td className="py-2 pr-4">{e.mood}</td>
+                              <td className="py-2 pr-4">{e.preset?.label}</td>
+                              <td className="py-2 pr-4">{e.happy}</td>
+                              <td className="py-2 pr-4">{e.sad}</td>
+                              <td className="py-2 pr-4 max-w-xl">{e.notes}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <div className="mt-3 flex gap-3">
+                        <button onClick={exportJSON} className="btn bg-amber-700 text-white hover:bg-amber-600">Export JSON</button>
+                        <label className="btn bg-amber-800 text-white hover:bg-amber-700 cursor-pointer">Import JSON
+                          <input type="file" accept="application/json" className="hidden" onChange={importJSON}/>
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {tab==='Session' && (
+              <section className="grid md:grid-cols-2 gap-6">
+                <div className="glass rounded-2xl p-6">
+                  <h3 className="text-lg font-semibold">Session Controls</h3>
+                  <div className="grid gap-4 mt-3">
+                    <div className="flex items-center gap-3">
+                      <label className="text-sm w-40">Length (minutes)</label>
+                      <input aria-label="Session length in minutes" type="number" min={1} max={180} value={minutes} onChange={e=>setMinutes(parseInt(e.target.value||'10'))} className="bg-white/70 rounded-xl p-2 w-28 outline-none" />
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <label className="text-sm w-40">Master Volume</label>
+                      <input aria-label="Master volume" type="range" min={0} max={1} step={0.01} value={masterVol} onChange={e=>setMasterVol(parseFloat(e.target.value))} />
+                      <span className="text-xs">{Math.round(masterVol*100)}%</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <label className="text-sm w-40">Tone Volume</label>
+                      <input aria-label="Tone volume" type="range" min={0} max={1} step={0.01} value={toneVol} onChange={e=>setToneVol(parseFloat(e.target.value))} />
+                      <span className="text-xs">{Math.round(toneVol*100)}%</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <label className="text-sm w-40">White Noise</label>
+                      <input aria-label="White noise level" type="range" min={0} max={0.5} step={0.01} value={noiseVol} onChange={e=>setNoiseVol(parseFloat(e.target.value))} />
+                      <span className="text-xs">{Math.round(noiseVol*100)}%</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <label className="text-sm w-40">Waveform</label>
+                      <select aria-label="Waveform" value={wave} onChange={e=>setWave(e.target.value)} className="bg-white/70 rounded-xl p-2 outline-none">
+                        <option value="sine">Sine (soft)</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="sawtooth">Saw</option>
+                        <option value="square">Square</option>
+                      </select>
+                    </div>
+                    <div className="flex gap-3 flex-wrap">
+                      {!playing ? (
+                        <button onClick={playAuto} className="btn bg-indigo-700 text-white hover:bg-indigo-600">Play Suggested</button>
+                      ) : (
+                        <button onClick={stop} className="btn bg-rose-700 text-white hover:bg-rose-600">Stop</button>
+                      )}
+                      {SCENES.map(s=> (
+                        <button key={s.key} onClick={()=>playScene(s.cfg)} className="btn bg-amber-700 text-white hover:bg-amber-600">{s.key}</button>
+                      ))}
+                    </div>
+                    {playing && <p className="text-xs opacity-70">Playing • {left}s remaining</p>}
+                  </div>
+                </div>
+
+                <div className="glass rounded-2xl p-6">
+                  <h3 className="text-lg font-semibold">Suggested for "{mood}"</h3>
+                  <p className="text-sm opacity-80">{preset.label}. Add white noise if you prefer a softer edge.</p>
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    {Object.entries(SOLFEGGIO).map(([f,meta])=> (
+                      <div key={f} className="bg-white/70 rounded-xl p-3 border border-white">
+                        <div className="font-semibold">{meta.name}</div>
+                        <div className="text-xs opacity-80">{meta.desc}</div>
+                        <button onClick={()=>playChakra(parseFloat(f))} className="mt-2 btn bg-amber-700 text-white hover:bg-amber-600 w-full">Play {f} Hz</button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {tab==='Chakras' && (
+              <section className="glass rounded-2xl p-6">
+                <h3 className="text-lg font-semibold mb-3">Chakra Hub</h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {CHAKRAS.map(c => (
+                    <button key={c.key} onClick={()=>playChakra(c.freq)} className="rounded-2xl p-4 border border-white bg-white/70 text-left transition hover:bg-white">
+                      <div className="text-lg font-semibold" style={{color:c.color}}>{c.label}</div>
+                      <div className="text-sm opacity-80">{c.freq} Hz • {(SOLFEGGIO[c.freq]&&SOLFEGGIO[c.freq].desc)||'chakra tone'}</div>
+                      <div className="text-xs opacity-70 mt-1">Tap to play for the set session length.</div>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {tab==='Library' && (
+              <section className="glass rounded-2xl p-6">
+                <h3 className="text-lg font-semibold">Tone Library</h3>
+                <p className="text-sm opacity-80 mb-3">Browse Solfeggio associations often used in sound-wellness communities (not medical claims).</p>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {Object.keys(SOLFEGGIO).map((f)=> (
+                    <div key={f} className="rounded-xl border border-white bg-white/70 p-3">
+                      <div className="font-medium">{SOLFEGGIO[f].name}</div>
+                      <div className="text-xs opacity-80">{SOLFEGGIO[f].desc}</div>
+                      <div className="mt-2 flex gap-2">
+                        <button onClick={()=>playChakra(parseFloat(f))} className="btn bg-amber-700 text-white hover:bg-amber-600">Play</button>
+                        <button onClick={stop} className="btn bg-slate-800 text-white hover:bg-slate-700">Stop</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {tab==='About' && (
+              <section className="glass rounded-2xl p-6 space-y-4">
+                <h3 className="text-lg font-semibold">About • Legal • Connect</h3>
+                <div className="text-sm space-y-3">
+                  <p><strong>Purpose.</strong> This companion supports relaxation and mindful reflection using Solfeggio tones and optional binaural beats. It is privacy-first: your diary entries remain in your browser's local storage unless you export them.</p>
+                  <p><strong>Disclaimer.</strong> This app is for relaxation, education, and self‑reflection only. It does not diagnose, treat, or cure any condition and is not a substitute for professional medical, psychological, or therapeutic care. Use at your own discretion and at comfortable volume levels. If you experience discomfort, stop immediately. By using this app, you agree that you are solely responsible for your choices and outcomes. Rev. AURorA Ute and contributors are not responsible for results of using or not using this app.</p>
+                  <p><strong>Data & Privacy.</strong> No accounts. No analytics. No servers. All entries are stored locally on your device. You may export or import your journal as JSON.</p>
+                  <p><strong>Contact & Community.</strong><br/>
+                    Connect with <strong>Rev. AURorA Ute</strong> — Certified Hypnotist & Spiritual Life Coach.<br/>
+                    YouTube: <a className="underline" href="https://www.youtube.com/@aurora-ute" target="_blank" rel="noreferrer">@aurora-ute</a><br/>
+                    Facebook: <em>Rev. AURorA Ute / AuraLand Spiritual Ministry</em>
+                  </p>
+                  <p className="text-xs opacity-70">© {new Date().getFullYear()} Rev. AURorA Ute. All rights reserved.</p>
+                </div>
+              </section>
+            )}
+          </main>
+
+          <footer className="max-w-6xl mx-auto px-6 pb-10 text-xs opacity-80">
+            Crafted with care • Nature‑inspired soft gold design • Privacy‑first
+          </footer>
+
+          {!audioReady && <ConsentBanner onEnable={ensureAudio}/>} 
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
   </script>
 </body>
 </html>
+
